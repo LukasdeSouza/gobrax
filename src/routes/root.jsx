@@ -1,7 +1,9 @@
+import MenuAppBar from "../components/appBar"
+
 const RootLayout = () => {
   return (
     <>
-      RootLayout
+      <MenuAppBar/>
     </>
   )
 }
