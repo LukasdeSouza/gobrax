@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom"
 import MenuAppBar from "../components/appBar"
+import { Stack } from "@mui/material"
 
 const RootLayout = () => {
   return (
     <>
       <MenuAppBar/>
-      <Outlet/>
+      <Stack px={3}>
+        <Outlet/>
+      </Stack>
     </>
   )
 }

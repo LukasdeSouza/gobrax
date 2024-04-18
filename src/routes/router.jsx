@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./root";
 import DriversPage from "../pages/drivers";
 import VehiclesPage from "../pages/vehicles";
@@ -10,6 +10,10 @@ export const router = createBrowserRouter([
     element: <RootLayout/>,
     errorElement: <ErrorPage/>,
     children: [
+      {
+        path: "/",
+        element: <Navigate to="/drivers" replace/>
+      },
       {
         path: '/drivers',
         element: <DriversPage/>

@@ -1,8 +1,11 @@
-import React from 'react'
+import { Stack } from '@mui/material'
+import TableCustom from '../../components/table'
 
 const DriversPage = () => {
   return (
-    <div>DriversPage</div>
+    <Stack height={'100%'}>
+      <TableCustom/>
+    </Stack>
   )
 }
 
