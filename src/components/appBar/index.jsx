@@ -3,15 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import { Button, Stack } from '@mui/material';
+import { Button, Link, Stack } from '@mui/material';
 import goBraxLogo from '../../assets/goBrax_logo.png'
 
 export default function MenuAppBar() {
@@ -35,23 +27,35 @@ export default function MenuAppBar() {
       <AppBar 
         elevation={0} 
         position="static" 
-        style={{backgroundColor:"#FFF", color: "#111"}}
+        style={{backgroundColor:"#FFF"}}
       >
         <Toolbar 
           component={'div'} 
           style={{
             display:'flex', 
             flexDirection:"row", 
-            justifyContent:'space-between'
+            justifyContent:'space-between',
           }}
         >
           <Stack direction='inherit' gap={4}>
-            <Typography variant="body1" component="div" fontWeight={700}>
+            <Link 
+              href='/drivers' 
+              underline='hover' 
+              variant='body1'
+              color='#000'
+              fontWeight={700}
+            >
               Motoristas
-            </Typography>
-            <Typography variant="body1" component="div" fontWeight={700}>
+            </Link>
+            <Link 
+              href='/vehicles' 
+              underline='hover' 
+              variant="body1" 
+              color='#000'
+              fontWeight={700}
+            >
               Veículos
-            </Typography>
+            </Link>
           </Stack>
           <img src={goBraxLogo} alt='Logo da goBrax' style={{width: 200}}/>
           <Button 
