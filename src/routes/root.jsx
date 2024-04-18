@@ -1,7 +1,11 @@
+import { Outlet } from "react-router-dom"
+import MenuAppBar from "../components/appBar"
+
 const RootLayout = () => {
   return (
     <>
-      RootLayout
+      <MenuAppBar/>
+      <Outlet/>
     </>
   )
 }
