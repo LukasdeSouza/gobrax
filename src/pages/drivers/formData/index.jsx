@@ -4,7 +4,7 @@ import InputTextController from '../../../components/inputs/inputTextController'
 import InputSelectController from "../../../components/inputs/inputSelectController"
 import { useEffect } from "react"
 
-const FormDataDrivers = ({onSaveDriver}) => {
+const FormDataDrivers = ({storeItem, onSaveDriver}) => {
   const { control, watch, setValue,  handleSubmit } = useForm({
     defaultValues: {
       bound: '',
@@ -12,9 +12,17 @@ const FormDataDrivers = ({onSaveDriver}) => {
     }
   })
 
+  const loadData = () => {
+    Object.keys(storeItem).forEach(key => {
+      setValue(key, storeItem[key] ?? '', { shouldValidate: false });
+    });
+  }
+
   useEffect(() => {
-    console.log(watch('bound'))
-  }, [watch('bound')])
+    if (Object.keys(storeItem)?.length > 0) {
+      loadData()
+    }
+  }, [])
 
   return(
     <Stack

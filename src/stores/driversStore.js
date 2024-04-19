@@ -6,6 +6,8 @@ class DriversStore {
     driver: {}
   }
   loading = {
+    list: false,
+    update: false,
     delete: false,
     save: false,
   }

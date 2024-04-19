@@ -4,11 +4,12 @@ import TableRowVehicles from './table/tableRow/index'
 import { headCellsVehicles } from './table/headCells'
 import {rowsVehicles} from './table/rows/index'
 import { Add } from '@mui/icons-material'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import RootStoreContext from '../../rootStore'
 import ModalEdit from '../../components/modal'
 import FormDataVehicles from './formData'
 import { LoadingButton } from '@mui/lab'
+import { serviceApi } from '../../service'
 
 const VehiclesPage = () => {
   const {vehiclesStore} = useContext(RootStoreContext);
@@ -25,7 +26,7 @@ const VehiclesPage = () => {
   const handleDeleteVehicle = () => {
     setConfirmDelete(false)
   }
-  
+
   const dataRow = (props) => {
     const {row, isItemSelected, labelId, handleClick} = props;
     

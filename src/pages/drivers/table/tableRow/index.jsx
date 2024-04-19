@@ -4,7 +4,7 @@ const TableRowDrivers = ({row, isItemSelected, labelId, handleClick}) => {
   return (
     <TableRow
       hover
-      onClick={(event) => handleClick(event, row.id)}
+      onClick={(event) => handleClick(event, row)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -32,7 +32,7 @@ const TableRowDrivers = ({row, isItemSelected, labelId, handleClick}) => {
     </TableCell>
     <TableCell align="left">{row.name}</TableCell>
     <TableCell align="left">{row.document}</TableCell>
-    <TableCell align="left">{row.bound ? 'Sim' : 'Não'}</TableCell>
+    <TableCell align="left">{row.bound === 'yes' ? 'Sim' : 'Não'}</TableCell>
   </TableRow>
   )
 }

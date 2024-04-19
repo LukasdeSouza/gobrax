@@ -1,18 +1,21 @@
-import { Button, Stack } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import TableCustom from '../../components/table'
 import {headCellsDrivers} from './table/headCells'
 import TableRowDrivers from './table/tableRow/index'
 import { rowsDrivers } from './table/rows'
 import { Add } from '@mui/icons-material'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import RootStoreContext from '../../rootStore'
 import { LoadingButton } from '@mui/lab'
 import FormDataDrivers from './formData'
 import ModalEdit from '../../components/modal'
+import DriversController from '../../controllers/driversController'
+import { observer } from 'mobx-react-lite'
 
 
-const DriversPage = () => {
+const DriversPage = observer(() => {
   const {driversStore} = useContext(RootStoreContext)
+  const controller = new DriversController(driversStore, 'drivers')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -26,7 +29,6 @@ const DriversPage = () => {
   const handleDeleteVehicle = () => {
     setConfirmDelete(false)
   }
-  
 
   const dataRow = (props) => {
     const {row, isItemSelected, labelId, handleClick} = props;
@@ -36,10 +38,17 @@ const DriversPage = () => {
         row={row}
         isItemSelected={isItemSelected}
         labelId={labelId}
-        handleClick={handleClick}
+        handleClick={(_, row) => {
+          setIsModalOpen(true)
+          driversStore.setState('driver', row)
+        }}
       />
     )
   }
+
+  useLayoutEffect(() => {
+    controller.getAllDrivers()
+  }, [])
 
 
   return (
@@ -54,17 +63,23 @@ const DriversPage = () => {
           Adicionar Motorista
         </Button>
       </Stack>
-      <TableCustom
-        rows={rowsDrivers}
-        headCells={headCellsDrivers}
-        dataRow={dataRow}
-      />
+      {driversStore.state.driversList.length > 0 
+        ? <TableCustom
+            rows={driversStore.state.driversList}
+            headCells={headCellsDrivers}
+            dataRow={dataRow}
+          />
+          : <Stack height={'100%'} alignItems={'center'} justifyContent={'center'}>
+              <Typography>Não há dados para exibir</Typography>
+            </Stack>
+      }
         <ModalEdit
           isModalOpen={isModalOpen}
           handleCloseModal={() => setIsModalOpen(false)}
           title={'Motorista'}
         >
           <FormDataDrivers
+            storeItem={driversStore.state.driver}
             onSavePassword={() => {}}
           />
           <Stack direction='row' justifyContent={'flex-end'} gap={2}>
@@ -99,5 +114,6 @@ const DriversPage = () => {
     </Stack>
   )
 }
+)
 
 export default DriversPage
