@@ -1,8 +1,9 @@
-import { Stack } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import TableCustom from '../../components/table'
 import TableRowVehicles from './table/tableRow/index'
 import { headCellsVehicles } from './table/headCells'
 import {rowsVehicles} from './table/rows/index'
+import { Add } from '@mui/icons-material'
 
 const VehiclesPage = () => {
   const dataRow = (props) => {
@@ -21,6 +22,15 @@ const VehiclesPage = () => {
 
   return (
     <Stack height={'100%'}>
+      <Stack width={'100%'} alignItems={'end'} my={2}>
+        <Button 
+          variant={'contained'} 
+          startIcon={<Add/>} 
+          style={{ textTransform:"capitalize" }}
+        >
+          Adicionar Veículo
+        </Button>
+      </Stack>
       <TableCustom
         rows={rowsVehicles}
         dataRow={dataRow}
