@@ -15,6 +15,17 @@ const VehiclesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false)
 
+  const onClickDelete = () => {
+    setConfirmDelete(true)
+    setTimeout(() => {
+      setConfirmDelete(false)
+    }, 2000)
+  }
+
+  const handleDeleteVehicle = () => {
+    setConfirmDelete(false)
+  }
+  
   const dataRow = (props) => {
     const {row, isItemSelected, labelId, handleClick} = props;
     
@@ -28,16 +39,6 @@ const VehiclesPage = () => {
     )
   }
 
-  const onClickDelete = () => {
-    setConfirmDelete(true)
-    setTimeout(() => {
-      setConfirmDelete(false)
-    }, 2000)
-  }
-
-  const handleDeleteVehicle = () => {
-    setConfirmDelete(false)
-  }
 
 
   return (

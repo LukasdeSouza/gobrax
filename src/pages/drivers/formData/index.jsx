@@ -4,11 +4,11 @@ import InputTextController from '../../../components/inputs/inputTextController'
 import InputSelectController from "../../../components/inputs/inputSelectController"
 import { useEffect } from "react"
 
-const FormDataVehicles = ({onSaveVehicle}) => {
+const FormDataDrivers = ({onSaveDriver}) => {
   const { control, watch, setValue,  handleSubmit } = useForm({
     defaultValues: {
       bound: '',
-      driver: ''
+      vehicle: ''
     }
   })
 
@@ -27,21 +27,15 @@ const FormDataVehicles = ({onSaveVehicle}) => {
       gap={3}
     >
       <InputTextController
-        nameField={'brand'}
+        nameField={'name'}
         control={control}
-        label={'Marca'}
+        label={'Nome'}
         required
       />
       <InputTextController
-        nameField={'modelo'}
+        nameField={'document'}
         control={control}
-        label={'Modelo'}
-        required
-      />
-      <InputTextController
-        nameField={'plate'}
-        control={control}
-        label={'Placa'}
+        label={'Documento'}
         required
       />
       <InputSelectController
@@ -56,11 +50,12 @@ const FormDataVehicles = ({onSaveVehicle}) => {
       />
       {watch('bound') === 'yes' && 
         <InputSelectController
-          nameField={'driver'}
+          nameField={'vehicle'}
           control={control}
-          label="Motorista Vinculado"
+          label="Veículo Vinculado"
           menuItemList={[
-            {key: 'fernando', label: 'fernando', value: 'fernando'}
+            {key: 'volvo', label: 'Volvo', value: 'volvo'},
+            {key: 'scania', label: 'Scania', value: 'scania'}
           ]}
         />
       }
@@ -68,4 +63,4 @@ const FormDataVehicles = ({onSaveVehicle}) => {
   )
 }
 
-export default FormDataVehicles
+export default FormDataDrivers
