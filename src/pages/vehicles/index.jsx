@@ -4,8 +4,12 @@ import TableRowVehicles from './table/tableRow/index'
 import { headCellsVehicles } from './table/headCells'
 import {rowsVehicles} from './table/rows/index'
 import { Add } from '@mui/icons-material'
+import { useContext } from 'react'
+import RootStoreContext from '../../rootStore'
 
 const VehiclesPage = () => {
+  const {vehiclesStore} = useContext(RootStoreContext)
+  
   const dataRow = (props) => {
     const {row, isItemSelected, labelId, handleClick} = props;
     

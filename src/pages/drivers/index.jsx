@@ -4,9 +4,13 @@ import {headCellsDrivers} from './table/headCells'
 import TableRowDrivers from './table/tableRow/index'
 import { rowsDrivers } from './table/rows'
 import { Add } from '@mui/icons-material'
+import { useContext, useState } from 'react'
+import RootStoreContext from '../../rootStore'
 
 
 const DriversPage = () => {
+  const {driversStore} = useContext(RootStoreContext)
+
   const dataRow = (props) => {
     const {row, isItemSelected, labelId, handleClick} = props;
     
