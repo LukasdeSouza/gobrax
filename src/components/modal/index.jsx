@@ -1,20 +1,38 @@
-import { Box, Modal, Typography } from "@mui/material"
+import { Close } from "@mui/icons-material"
+import { Box, Divider, IconButton, Modal, Slide, Stack, Typography } from "@mui/material"
 
-const ModalEdit = ({openModal, handleCloseModal, title, children}) => {
+const ModalEdit = ({isModalOpen, handleCloseModal, title, children}) => {
   return (
     <Modal
-      open={openModal}
+      open={isModalOpen}
       onClose={handleCloseModal}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
     >
-      <Box>
-        <Typography variant="h6" component="h2">
-          {title}
-        </Typography>
-        {children}
+    <Slide in={isModalOpen} direction='up'>
+      <Box
+        padding={2}
+        borderRadius={2}
+        width={300}
+        style={{
+          position: 'absolute', 
+          top: '20%',
+          left: '40%',
+          backgroundColor: '#FFF'
+        }}>
+          <Stack direction='row' justifyContent={'space-between'} mb={1}>
+            <Typography>
+              {title}
+            </Typography>
+            <IconButton size="small" onClick={handleCloseModal}>
+              <Close style={{fontSize: 18}}/>
+            </IconButton>
+          </Stack>
+          <Divider flexItem/>
+          <Stack mt={3}>
+            {children}
+          </Stack>
       </Box>
-    </Modal>
+    </Slide>
+  </Modal>
   )
 }
 
