@@ -18,7 +18,7 @@ const FormDataVehicles = ({control, watch, setValue, storeItemVehicle, storeItem
     } else {
       setValue('brand', '')
       setValue('plate', '')
-      setValue('modelo', '')
+      setValue('model', '')
       setValue('bound', '')
       setValue('driver', '')
     }

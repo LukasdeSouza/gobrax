@@ -26,7 +26,7 @@ class VehiclesController {
     const data = await serviceApi(this.endPoint, 'POST', stringify)
     if (data) {
       toastSuccess({message: 'Veículo Adicionado com Sucesso!'})
-      this.getAllDrivers()
+      this.getAllVehicles()
     } else {
       toastError({message: 'Erro ao Criar Veículo!'})
     }
@@ -38,7 +38,7 @@ class VehiclesController {
 
     if(data) {
       toastSuccess({message: 'Veículo Atualizado com Sucesso!'})
-      this.getAllDrivers()
+      this.getAllVehicles()
     } else {
       toastError({message: 'Erro ao Atualizar Veículo!'})
     }
@@ -49,6 +49,7 @@ class VehiclesController {
 
     if(data) {
       toastSuccess({message: 'Veículo Deletado com Sucesso!'})
+      this.getAllVehicles()
     } else {
       toastError({message: 'Erro ao Deletar Veículo!'})
     }

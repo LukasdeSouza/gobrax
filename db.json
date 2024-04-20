@@ -25,35 +25,12 @@
   "vehicles": [
     {
       "id": "1",
-      "brand": "Volvo",
-      "model": "XYZ",
-      "plate": "ABC1234",
-      "bound": "yes",
-      "driver": "Gabriel Silva"
-    },
-    {
-      "id": "4",
-      "brand": "Mercedez-Bens",
-      "model": "DGB",
-      "plate": "JKL3456",
+      "brand": "SCANIA",
+      "model": "SXAD",
+      "plate": "1434",
       "bound": "no",
-      "driver": null
-    },
-    {
-      "id": "81d9",
-      "brand": "Scania",
-      "plate": "2135231",
-      "model": "XYZH45",
-      "bound": "no",
-      "driver": ""
-    },
-    {
-      "id": "746c",
-      "brand": "Hyunda",
-      "plate": "43sda",
-      "model": "SUDAHS",
-      "bound": "yes",
-      "driver": "fernando"
+      "driver": "",
+      "modelo": ""
     },
     {
       "id": "8e5d",
@@ -62,6 +39,14 @@
       "model": "Abc",
       "bound": "no",
       "driver": ""
+    },
+    {
+      "id": "3f9d",
+      "brand": "HYUNDAI",
+      "plate": "XUAHSA",
+      "model": "DA5S4DA",
+      "bound": "yes",
+      "driver": "fernando"
     }
   ]
 }

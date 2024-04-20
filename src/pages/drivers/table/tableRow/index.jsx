@@ -5,7 +5,6 @@ const TableRowDrivers = ({row, isItemSelected, labelId, handleClick, onClickEdit
   return (
     <TableRow
       hover
-      onClick={(event) => handleClick(event, row?.id)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -17,6 +16,7 @@ const TableRowDrivers = ({row, isItemSelected, labelId, handleClick, onClickEdit
       <Checkbox
         color="primary"
         checked={isItemSelected}
+        onClick={(event) => handleClick(event, row?.id)}
         inputProps={{
           'aria-labelledby': labelId,
         }}

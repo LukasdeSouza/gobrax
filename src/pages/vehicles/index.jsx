@@ -33,10 +33,12 @@ const VehiclesPage = observer(() => {
 
   const handleDeleteVehicle = async () => {
     const vehicleId = vehiclesStore.state.vehicle?.id
+    console.log('vehicleId', vehicleId)
     setLoadingDelete(true)
 
     await controller.deleteVehicle(vehicleId).then(() => {
       controller.getAllVehicles()
+      location.reload()
     })
     setConfirmDelete(false)
     setLoadingDelete(false)
@@ -53,6 +55,7 @@ const VehiclesPage = observer(() => {
       await controller.addNewVehicle(vehicles)
     }
     await controller.getAllVehicles()
+    location.reload()
     setLoadingSave(false)
     setIsModalOpen(false)
   }
@@ -95,7 +98,10 @@ const VehiclesPage = observer(() => {
           <Button 
             variant={'contained'}
             startIcon={<Add/>}
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              vehiclesStore.setState('vehicle', {})
+              setIsModalOpen(true)
+            }}
             style={{ textTransform:"capitalize" }}
           >
             Adicionar Veículo
