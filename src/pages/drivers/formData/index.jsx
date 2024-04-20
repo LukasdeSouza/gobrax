@@ -5,7 +5,7 @@ import { useEffect } from "react"
 import { cpfMask } from "../../../utils/masks"
 
 
-const FormDataDrivers = ({control, watch, setValue, storeItemDriver, storeItemVehicle, handleSaveDriver}) => {
+const FormDataDrivers = ({control, watch, setValue, storeItemDriver, storeItemVehicle}) => {
   const loadData = () => {
     Object.keys(storeItemDriver).forEach(key => {
       setValue(key, storeItemDriver[key] ?? '', { shouldValidate: false });

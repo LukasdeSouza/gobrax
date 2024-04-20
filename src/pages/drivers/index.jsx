@@ -20,13 +20,7 @@ const DriversPage = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
 
-  const { control, watch, setValue,   } = useForm({
-   defaultValues: {
-      bound: '',
-      vehicle: '',
-      document: null
-    }
-  })
+  const { control, watch, setValue,   } = useForm()
 
   const onClickDelete = () => {
     setConfirmDelete(true)
@@ -123,7 +117,6 @@ const DriversPage = observer(() => {
             watch={watch}
             storeItemDriver={driversStore.state.driver}
             storeItemVehicle={vehiclesStore.state.vehiclesList}
-            handleSaveDriver={handleSaveDriver}
           />
           <Stack direction='row' justifyContent={'flex-end'} gap={2}>
             {confirmDelete 

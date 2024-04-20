@@ -4,17 +4,24 @@ import TableRowVehicles from './table/tableRow/index'
 import { headCellsVehicles } from './table/headCells'
 import {rowsVehicles} from './table/rows/index'
 import { Add } from '@mui/icons-material'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useLayoutEffect, useState } from 'react'
 import RootStoreContext from '../../rootStore'
 import ModalEdit from '../../components/modal'
 import FormDataVehicles from './formData'
 import { LoadingButton } from '@mui/lab'
 import { serviceApi } from '../../service'
+import VehiclesController from '../../controllers/vehiclesController'
+import { useForm } from 'react-hook-form'
+import SelectedData from '../../components/selectedData'
 
 const VehiclesPage = () => {
-  const {vehiclesStore} = useContext(RootStoreContext);
+  const {vehiclesStore, driversStore} = useContext(RootStoreContext);
+  const controller = new VehiclesController(vehiclesStore)
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false)
+
+  const { control, watch, setValue,   } = useForm()
 
   const onClickDelete = () => {
     setConfirmDelete(true)
@@ -25,6 +32,17 @@ const VehiclesPage = () => {
 
   const handleDeleteVehicle = () => {
     setConfirmDelete(false)
+  }
+
+  const handleSaveVehicles = async () => {
+    const vehicles = {...control._formValues}
+
+    if (vehicles?.id) {
+      await controller.updateDriver(vehicles?.id, vehicles)
+    } else {
+      await controller.addNewDriver(vehicles)
+    }
+    setIsModalOpen(false)
   }
 
   const dataRow = (props) => {
@@ -40,11 +58,19 @@ const VehiclesPage = () => {
     )
   }
 
+  useLayoutEffect(() => {
+    controller.getAllVehicles()
+  }, [])
+
 
 
   return (
-    <Box>
+    <Stack>
       <Stack height={'100%'}>
+      <SelectedData 
+        driverName={vehiclesStore.state.driver}
+        vehiclePlate={vehiclesStore.state.plate ?? 'Não vínculado'}
+      />
         <Stack width={'100%'} alignItems={'end'} my={2}>
           <Button 
             variant={'contained'}
@@ -56,7 +82,7 @@ const VehiclesPage = () => {
           </Button>
         </Stack>
         <TableCustom
-          rows={rowsVehicles}
+          rows={vehiclesStore.state.vehiclesList}
           dataRow={dataRow}
           headCells={headCellsVehicles}
           />
@@ -67,7 +93,11 @@ const VehiclesPage = () => {
           title={'Veículos'}
         >
           <FormDataVehicles
-            onSavePassword={() => {}}
+            control={control}
+            setValue={setValue}
+            watch={watch}
+            storeItemVehicle={vehiclesStore.state.vehicle}
+            storeItemDriver={driversStore.state.driversList}
           />
           <Stack direction='row' justifyContent={'flex-end'} gap={2}>
             {confirmDelete 
@@ -92,13 +122,14 @@ const VehiclesPage = () => {
             <LoadingButton
               variant='contained'
               loading={vehiclesStore.loading.save}
+              onClick={handleSaveVehicles}
               style={{textTransform:'capitalize'}}
             >
               Salvar
             </LoadingButton>
           </Stack>
         </ModalEdit>
-    </Box>
+    </Stack>
   )
 }
 

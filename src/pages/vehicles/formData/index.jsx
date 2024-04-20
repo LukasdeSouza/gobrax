@@ -4,26 +4,32 @@ import InputTextController from '../../../components/inputs/inputTextController'
 import InputSelectController from "../../../components/inputs/inputSelectController"
 import { useEffect } from "react"
 
-const FormDataVehicles = ({onSaveVehicle}) => {
-  const { control, watch, setValue,  handleSubmit } = useForm({
-    defaultValues: {
-      bound: '',
-      driver: ''
-    }
-  })
+const FormDataVehicles = ({control, watch, setValue, storeItemVehicle, storeItemDriver}) => {
+
+  const loadData = () => {
+    Object.keys(storeItemVehicle).forEach(key => {
+      setValue(key, storeItemVehicle[key] ?? '', { shouldValidate: false });
+    });
+  }
 
   useEffect(() => {
-    console.log(watch('bound'))
-  }, [watch('bound')])
+    if (Object.keys(storeItemVehicle)?.length > 0) {
+      loadData()
+    } else {
+      setValue('brand', '')
+      setValue('plate', '')
+      setValue('modelo', '')
+      setValue('bound', '')
+      setValue('driver', '')
+    }
+  }, [])
 
   return(
     <Stack
-      component={'form'}
       height={'100%'}
       paddingRight={1}
       marginBottom={3}
       marginRight={-1}
-      onSubmit={handleSubmit(() => onSavePassword({...control._formValues}))}
       gap={3}
     >
       <InputTextController
