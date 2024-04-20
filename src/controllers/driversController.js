@@ -21,7 +21,6 @@ class DriversController {
   }
 
   async addNewDriver(newDriver) {
-    this.store.setLoading('save', true)
     const stringify = JSON.stringify(newDriver)
 
     const data = await serviceApi(this.endPoint, 'POST', stringify)
@@ -31,11 +30,9 @@ class DriversController {
     } else {
       toastError({message: 'Erro ao Criar Motorista!'})
     }
-    this.store.setLoading('save', false)
   }
 
   async updateDriver(driverId, driver) {
-    this.store.setLoading('update', true)
     const stringify = JSON.stringify(driver)
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'PATCH', stringify)
 
@@ -45,11 +42,9 @@ class DriversController {
     } else {
       toastError({message: 'Erro ao Atualizar Motorista!'})
     }
-    this.store.setLoading('update', false)
   }
 
   async deleteDriver(driverId) {
-    this.store.setLoading('delete', true)
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'DELETE')
 
     if(data) {
@@ -58,7 +53,6 @@ class DriversController {
     } else {
       toastError({message: 'Erro ao Deletar Motorista!'})
     }
-    this.store.setLoading('delete', false)
   }
 
 

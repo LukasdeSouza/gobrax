@@ -15,7 +15,7 @@ class VehiclesController {
     if(data) {
       this.store.setState('vehiclesList', data)
     } else {
-      alert('Não foi possível carregador os Dados!')
+      toastError({message: 'Não foi possível carregador os Dados!'})
     }
     this.store.setLoading('list', false)
   }

@@ -38,6 +38,7 @@ const DriversPage = observer(() => {
     await controller.deleteDriver(driverId).then(() => {
       controller.getAllDrivers()
     })
+    location.reload()
     setConfirmDelete(false)
     setLoadingDelete(false)
     setIsModalOpen(false)
@@ -52,6 +53,7 @@ const DriversPage = observer(() => {
     } else {
       await controller.addNewDriver(driver)
     }
+    location.reload()
     setLoadingSave(false)
     setIsModalOpen(false)
   }
