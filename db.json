@@ -1,16 +1,67 @@
 {
   "drivers": [
-    { "id": 1, "name": "Gabriel Silva", "document": "123.456.789", "bound": "yes" },
-    { "id": 2, "name": "Fernando Mota", "document": "987.654.321", "bound": "no" },
-    { "id": 3, "name": "Antonio Pedro", "document": "456.123.789", "bound": "no" },
-    { "id": 4, "name": "Antonio Fagundes", "document": "789.456.123", "bound": "yes" },
-    { "id": 5, "name": "Esternio Garcia", "document": "321.654.987", "bound": "no" }
+    {
+      "id": "1",
+      "name": "Gabriel Silva",
+      "document": "123.456.789",
+      "bound": "yes",
+      "vehicle": "ABC1234"
+    },
+    {
+      "id": "2",
+      "name": "Fernando Mota",
+      "document": "987.654.321",
+      "bound": "no",
+      "vehicle": null
+    },
+    {
+      "id": "4",
+      "name": "Antonio Fagundes",
+      "document": "789.456.123",
+      "bound": "yes",
+      "vehicle": "MNO7890"
+    }
   ],
   "vehicles": [
-    { "id": 1, "brand": "Volvo", "model": "XYZ", "plate": "ABC1234", "bound": "yes" },
-    { "id": 2, "brand": "Scania", "model": "ABC", "plate": "DEF5678", "bound": "no" },
-    { "id": 3, "brand": "Iveco", "model": "AZX", "plate": "GHI9012", "bound": "no" },
-    { "id": 4, "brand": "Mercedez-Bens", "model": "DGB", "plate": "JKL3456", "bound": "no" },
-    { "id": 5, "brand": "Hyundai", "model": "DBZ", "plate": "MNO7890", "bound": "yes" }
-  ]  
+    {
+      "id": "1",
+      "brand": "Volvo",
+      "model": "XYZ",
+      "plate": "ABC1234",
+      "bound": "yes",
+      "driver": "Gabriel Silva"
+    },
+    {
+      "id": "2",
+      "brand": "Scania",
+      "model": "ABC",
+      "plate": "DEF5678",
+      "bound": "no",
+      "driver": null
+    },
+    {
+      "id": "3",
+      "brand": "Iveco",
+      "model": "AZX",
+      "plate": "GHI9012",
+      "bound": "no",
+      "driver": null
+    },
+    {
+      "id": "4",
+      "brand": "Mercedez-Bens",
+      "model": "DGB",
+      "plate": "JKL3456",
+      "bound": "no",
+      "driver": null
+    },
+    {
+      "id": "5",
+      "brand": "Hyundai",
+      "model": "DBZ",
+      "plate": "MNO7890",
+      "bound": "yes",
+      "driver": "Antonio Fagundes"
+    }
+  ]
 }

@@ -23,4 +23,10 @@ export const headCellsDrivers = [
     disablePadding: false,
     label: 'Vínculo',
   },
+  {
+    id: 'actions',
+    numeric: false,
+    disablePadding: false,
+    label: 'Ações',
+  },
 ];

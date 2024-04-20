@@ -1,10 +1,11 @@
-import { Checkbox, TableCell, TableRow } from "@mui/material"
+import { Delete, Edit } from "@mui/icons-material"
+import { Checkbox, IconButton, Stack, TableCell, TableRow } from "@mui/material"
 
-const TableRowDrivers = ({row, isItemSelected, labelId, handleClick}) => {
+const TableRowDrivers = ({row, isItemSelected, labelId, handleClick, onClickEdit, onClickDelete}) => {
   return (
     <TableRow
       hover
-      onClick={(event) => handleClick(event, row)}
+      onClick={(event) => handleClick(event, row?.id)}
       role="checkbox"
       aria-checked={isItemSelected}
       tabIndex={-1}
@@ -33,6 +34,16 @@ const TableRowDrivers = ({row, isItemSelected, labelId, handleClick}) => {
     <TableCell align="left">{row.name}</TableCell>
     <TableCell align="left">{row.document}</TableCell>
     <TableCell align="left">{row.bound === 'yes' ? 'Sim' : 'Não'}</TableCell>
+    <TableCell align="left" width={100}>
+      <Stack direction='row'>
+        <IconButton size="small" onClick={onClickEdit}>
+          <Edit/>
+        </IconButton>
+        <IconButton size="small" onClick={onClickDelete}>
+          <Delete/>
+        </IconButton>
+      </Stack>
+    </TableCell>
   </TableRow>
   )
 }

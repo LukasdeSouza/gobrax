@@ -19,8 +19,8 @@ const ModalEdit = ({isModalOpen, handleCloseModal, title, children}) => {
           backgroundColor: '#FFF'
         }}>
           <Stack direction='row' justifyContent={'space-between'} mb={1}>
-            <Typography>
-              {title}
+            <Typography fontWeight={600}>
+              Detalhes do {title}
             </Typography>
             <IconButton size="small" onClick={handleCloseModal}>
               <Close style={{fontSize: 18}}/>

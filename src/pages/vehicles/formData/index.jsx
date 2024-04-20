@@ -33,16 +33,15 @@ const FormDataVehicles = ({onSaveVehicle}) => {
         required
       />
       <InputTextController
-        nameField={'modelo'}
-        control={control}
-        label={'Modelo'}
-        required
-      />
-      <InputTextController
         nameField={'plate'}
         control={control}
         label={'Placa'}
         required
+      />
+      <InputTextController
+        nameField={'modelo'}
+        control={control}
+        label={'Modelo'}
       />
       <InputSelectController
         nameField={'bound'}

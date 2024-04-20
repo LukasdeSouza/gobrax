@@ -2,19 +2,19 @@ import { Button, Stack, Typography } from '@mui/material'
 import TableCustom from '../../components/table'
 import {headCellsDrivers} from './table/headCells'
 import TableRowDrivers from './table/tableRow/index'
-import { rowsDrivers } from './table/rows'
 import { Add } from '@mui/icons-material'
-import { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useLayoutEffect, useState } from 'react'
 import RootStoreContext from '../../rootStore'
 import { LoadingButton } from '@mui/lab'
 import FormDataDrivers from './formData'
 import ModalEdit from '../../components/modal'
 import DriversController from '../../controllers/driversController'
+import SelectedData from '../../components/selectedData'
 import { observer } from 'mobx-react-lite'
 
 
 const DriversPage = observer(() => {
-  const {driversStore} = useContext(RootStoreContext)
+  const {driversStore, vehiclesStore} = useContext(RootStoreContext)
   const controller = new DriversController(driversStore, 'drivers')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
@@ -26,8 +26,16 @@ const DriversPage = observer(() => {
     }, 2000)
   }
 
-  const handleDeleteVehicle = () => {
+  const handleDeleteDriver = async () => {
+    const driverId = driversStore.state.driver?.id
+    await controller.deleteDriver(driverId)
     setConfirmDelete(false)
+    setIsModalOpen(false)
+  }
+
+  const handleSaveDriver = async (driver) => {
+    await controller.addNewDriver(driver)
+    setIsModalOpen(false)
   }
 
   const dataRow = (props) => {
@@ -38,10 +46,15 @@ const DriversPage = observer(() => {
         row={row}
         isItemSelected={isItemSelected}
         labelId={labelId}
-        handleClick={(_, row) => {
-          setIsModalOpen(true)
+        handleClick={() => {
           driversStore.setState('driver', row)
+          handleClick()
         }}
+        onClickEdit={() => {
+          driversStore.setState('driver', row)
+          setIsModalOpen(true)
+        }}
+        onClickDelete={handleDeleteDriver}
       />
     )
   }
@@ -53,11 +66,18 @@ const DriversPage = observer(() => {
 
   return (
     <Stack height={'100%'}>
-      <Stack width={'100%'} alignItems={'end'} my={2}>
+      <SelectedData 
+        driverName={driversStore.state.driver?.name}
+        vehiclePlate={driversStore.state.driver?.vehicle ?? 'Não vínculado'}
+      />
+        <Stack width={'100%'} alignItems={'end'} my={2}>
         <Button
           variant={'contained'} 
           startIcon={<Add/>} 
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            driversStore.setState('driver', {})
+            setIsModalOpen(true)
+          }}
           style={{ textTransform:"capitalize" }}
         >
           Adicionar Motorista
@@ -69,7 +89,7 @@ const DriversPage = observer(() => {
             headCells={headCellsDrivers}
             dataRow={dataRow}
           />
-          : <Stack height={'100%'} alignItems={'center'} justifyContent={'center'}>
+          : <Stack height={'40vh'} alignItems={'center'} justifyContent={'center'}>
               <Typography>Não há dados para exibir</Typography>
             </Stack>
       }
@@ -79,8 +99,9 @@ const DriversPage = observer(() => {
           title={'Motorista'}
         >
           <FormDataDrivers
-            storeItem={driversStore.state.driver}
-            onSavePassword={() => {}}
+            storeItemDriver={driversStore.state.driver}
+            storeItemVehicle={vehiclesStore.state.vehiclesList}
+            handleSaveDriver={handleSaveDriver}
           />
           <Stack direction='row' justifyContent={'flex-end'} gap={2}>
             {confirmDelete 
@@ -88,7 +109,7 @@ const DriversPage = observer(() => {
                 color='error'
                 variant='outlined'
                 loading={driversStore.loading.delete}
-                onClick={handleDeleteVehicle}
+                onClick={handleDeleteDriver}
                 style={{textTransform:'capitalize'}}
               >
                 Confirmar Deleção ?
@@ -105,6 +126,7 @@ const DriversPage = observer(() => {
             <LoadingButton
               variant='contained'
               loading={driversStore.loading.save}
+              onClick={handleSaveDriver}
               style={{textTransform:'capitalize'}}
             >
               Salvar

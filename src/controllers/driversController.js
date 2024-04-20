@@ -48,9 +48,10 @@ class DriversController {
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'DELETE')
 
     if(data) {
-      alert('Motorista Atualizado com Sucesso!')
+      alert('Motorista Deletado com Sucesso!')
+      this.getAllDrivers()
     } else {
-      alert('Erro ao Atualizar Motorista!')
+      alert('Erro ao Deletar Motorista!')
     }
     this.store.setLoading('delete', false)
   }

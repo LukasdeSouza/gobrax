@@ -12,6 +12,7 @@ const InputSelectController = ({
                                  },
                                  nameField,
                                  control,
+                                 disabled,
                                  onClose,
                                  menuItemList,
                                  ...props
@@ -47,6 +48,7 @@ const InputSelectController = ({
                 value={value}
                 onChange={onChange}
                 onClose={onClose}
+                disabled={disabled}
                 size={'small'}
                 {...props}
                 MenuProps={{

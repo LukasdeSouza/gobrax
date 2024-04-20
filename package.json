@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.15",
+    "js-brasil": "^2.6.1",
     "json-server": "^1.0.0-alpha.23",
     "mobx": "^6.12.3",
     "mobx-react-lite": "^4.0.7",
