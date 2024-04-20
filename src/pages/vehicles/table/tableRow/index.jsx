@@ -31,10 +31,10 @@ const TableRowVehicles = ({row, isItemSelected, labelId, handleClick, onClickEdi
     >
       {row.id}
     </TableCell>
-    <TableCell align="left">{row.brand}</TableCell>
-    <TableCell align="left">{row.model}</TableCell>
-    <TableCell align="left">{row.plate}</TableCell>
-    <TableCell align="left">{row.bound ? 'Sim' : 'Não'}</TableCell>
+    <TableCell align="left">{row?.brand}</TableCell>
+    <TableCell align="left">{row?.model}</TableCell>
+    <TableCell align="left">{row?.plate}</TableCell>
+    <TableCell align="left">{row?.bound ? 'Sim' : 'Não'}</TableCell>
     <TableCell align="left" width={100}>
       <Stack direction='row'>
         <IconButton size="small" onClick={onClickEdit}>

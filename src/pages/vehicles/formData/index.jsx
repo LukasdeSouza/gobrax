@@ -45,7 +45,7 @@ const FormDataVehicles = ({control, watch, setValue, storeItemVehicle, storeItem
         required
       />
       <InputTextController
-        nameField={'modelo'}
+        nameField={'model'}
         control={control}
         label={'Modelo'}
       />

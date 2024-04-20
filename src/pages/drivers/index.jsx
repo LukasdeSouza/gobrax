@@ -19,6 +19,8 @@ const DriversPage = observer(() => {
   const controller = new DriversController(driversStore, 'drivers')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [loadingDelete, setLoadingDelete] = useState(false)
+  const [loadingSave, setLoadingSave] = useState(false)
 
   const { control, watch, setValue,   } = useForm()
 
@@ -31,21 +33,26 @@ const DriversPage = observer(() => {
 
   const handleDeleteDriver = async () => {
     const driverId = driversStore.state.driver?.id
+    setLoadingDelete(true)
+
     await controller.deleteDriver(driverId).then(() => {
       controller.getAllDrivers()
     })
     setConfirmDelete(false)
+    setLoadingDelete(false)
     setIsModalOpen(false)
   }
 
   const handleSaveDriver = async () => {
     const driver = {...control._formValues}
+    setLoadingSave(true)
 
     if (driver?.id) {
       await controller.updateDriver(driver?.id, driver)
     } else {
       await controller.addNewDriver(driver)
     }
+    setLoadingSave(false)
     setIsModalOpen(false)
   }
 
@@ -127,7 +134,7 @@ const DriversPage = observer(() => {
             ? <LoadingButton
                 color='error'
                 variant='outlined'
-                loading={driversStore.loading.delete}
+                loading={loadingDelete}
                 onClick={handleDeleteDriver}
                 style={{textTransform:'capitalize'}}
               >
@@ -144,7 +151,7 @@ const DriversPage = observer(() => {
             }
             <LoadingButton
               variant='contained'
-              loading={driversStore.loading.save}
+              loading={loadingSave}
               onClick={handleSaveDriver}
               style={{textTransform:'capitalize'}}
             >

@@ -18,7 +18,9 @@ const VehiclesPage = observer(() => {
   const controller = new VehiclesController(vehiclesStore, 'vehicles')
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [loadingSave, setLoadingSave] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false)
 
   const { control, watch, setValue,   } = useForm()
 
@@ -31,20 +33,27 @@ const VehiclesPage = observer(() => {
 
   const handleDeleteVehicle = async () => {
     const vehicleId = vehiclesStore.state.vehicle?.id
-    await controller.deleteVehicle(vehicleId)
-    await controller.getAllVehicles()
+    setLoadingDelete(true)
+
+    await controller.deleteVehicle(vehicleId).then(() => {
+      controller.getAllVehicles()
+    })
     setConfirmDelete(false)
+    setLoadingDelete(false)
     setIsModalOpen(false)
   }
 
   const handleSaveVehicles = async () => {
     const vehicles = {...control._formValues}
 
+    setLoadingSave(true)
     if (vehicles?.id) {
       await controller.updateVehicle(vehicles?.id, vehicles)
     } else {
       await controller.addNewVehicle(vehicles)
     }
+    await controller.getAllVehicles()
+    setLoadingSave(false)
     setIsModalOpen(false)
   }
 
@@ -125,7 +134,7 @@ const VehiclesPage = observer(() => {
             ? <LoadingButton
                 color='error'
                 variant='outlined'
-                loading={vehiclesStore.loading.delete}
+                loading={loadingDelete}
                 onClick={handleDeleteVehicle}
                 style={{textTransform:'capitalize'}}
               >
@@ -142,7 +151,7 @@ const VehiclesPage = observer(() => {
             }
             <LoadingButton
               variant='contained'
-              loading={vehiclesStore.loading.save}
+              loading={loadingSave}
               onClick={handleSaveVehicles}
               style={{textTransform:'capitalize'}}
             >

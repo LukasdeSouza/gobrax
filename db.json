@@ -43,7 +43,7 @@
       "id": "81d9",
       "brand": "Scania",
       "plate": "2135231",
-      "modelo": "XYZH45",
+      "model": "XYZH45",
       "bound": "no",
       "driver": ""
     },
@@ -51,7 +51,7 @@
       "id": "746c",
       "brand": "Hyunda",
       "plate": "43sda",
-      "modelo": "SUDAHS",
+      "model": "SUDAHS",
       "bound": "yes",
       "driver": "fernando"
     },
@@ -59,7 +59,7 @@
       "id": "8e5d",
       "brand": "ABC",
       "plate": "154-XZ",
-      "modelo": "Abc",
+      "model": "Abc",
       "bound": "no",
       "driver": ""
     }
