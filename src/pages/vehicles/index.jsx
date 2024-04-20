@@ -9,14 +9,14 @@ import RootStoreContext from '../../rootStore'
 import ModalEdit from '../../components/modal'
 import FormDataVehicles from './formData'
 import { LoadingButton } from '@mui/lab'
-import { serviceApi } from '../../service'
 import VehiclesController from '../../controllers/vehiclesController'
 import { useForm } from 'react-hook-form'
 import SelectedData from '../../components/selectedData'
+import { observer } from 'mobx-react-lite'
 
-const VehiclesPage = () => {
+const VehiclesPage = observer(() => {
   const {vehiclesStore, driversStore} = useContext(RootStoreContext);
-  const controller = new VehiclesController(vehiclesStore)
+  const controller = new VehiclesController(vehiclesStore, 'vehicles')
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false)
@@ -32,8 +32,7 @@ const VehiclesPage = () => {
 
   const handleDeleteVehicle = async () => {
     const vehicleId = vehiclesStore.state.vehicle?.id
-    await controller.deleteDriver(vehicleId)
-    await controller.getAllVehicles()
+    await controller.deleteVehicle(vehicleId)
     setConfirmDelete(false)
     setIsModalOpen(false)
   }
@@ -42,9 +41,9 @@ const VehiclesPage = () => {
     const vehicles = {...control._formValues}
 
     if (vehicles?.id) {
-      await controller.updateDriver(vehicles?.id, vehicles)
+      await controller.updateVehicle(vehicles?.id, vehicles)
     } else {
-      await controller.addNewDriver(vehicles)
+      await controller.addNewVehicle(vehicles)
     }
     await controller.getAllVehicles()
     setIsModalOpen(false)
@@ -58,7 +57,10 @@ const VehiclesPage = () => {
         row={row}
         isItemSelected={isItemSelected}
         labelId={labelId}
-        handleClick={handleClick}
+        handleClick={() => {
+          vehiclesStore.setState('vehicle', row)
+          handleClick()
+        }}
       />
     )
   }
@@ -73,8 +75,8 @@ const VehiclesPage = () => {
     <Stack>
       <Stack height={'100%'}>
       <SelectedData 
-        driverName={vehiclesStore.state.driver}
-        vehiclePlate={vehiclesStore.state.plate ?? 'Não vínculado'}
+        driverName={vehiclesStore.state.vehicle?.driver ?? 'Não informado'}
+        vehiclePlate={vehiclesStore.state.vehicle?.plate ?? 'Não vínculado'}
       />
         <Stack width={'100%'} alignItems={'end'} my={2}>
           <Button 
@@ -93,7 +95,9 @@ const VehiclesPage = () => {
             headCells={headCellsVehicles}
           />
           : vehiclesStore.loading.list
-          ? <CircularProgress color='primary'/>
+          ? <Stack height={'100%'} alignItems={'center'} justifyContent={'center'}>
+              <CircularProgress color='primary'/>
+             </Stack>
             : <Stack height={'40vh'} alignItems={'center'} justifyContent={'center'}>
               <Typography>Não há dados para exibir</Typography>
             </Stack>
@@ -145,5 +149,6 @@ const VehiclesPage = () => {
     </Stack>
   )
 }
+)
 
 export default VehiclesPage

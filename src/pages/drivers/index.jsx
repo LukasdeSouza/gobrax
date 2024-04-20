@@ -78,7 +78,7 @@ const DriversPage = observer(() => {
   return (
     <Stack height={'100%'}>
       <SelectedData 
-        driverName={driversStore.state.driver?.name}
+        driverName={driversStore.state.driver?.name ?? 'Não Informado'}
         vehiclePlate={driversStore.state.driver?.vehicle ?? 'Não vínculado'}
       />
         <Stack width={'100%'} alignItems={'end'} my={2}>
@@ -101,7 +101,9 @@ const DriversPage = observer(() => {
             dataRow={dataRow}
           />
           : driversStore.loading.list
-          ? <CircularProgress color='primary'/>
+          ?  <Stack height={'100%'} alignItems={'center'} justifyContent={'center'}>
+              <CircularProgress color='primary'/>
+            </Stack>
           : <Stack height={'40vh'} alignItems={'center'} justifyContent={'center'}>
               <Typography>Não há dados para exibir</Typography>
             </Stack>
