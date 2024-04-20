@@ -27,6 +27,7 @@ const InputTextController = ({
         return (
           <FormControl fullWidth key={`text-field-${nameField}`}>
             <TextField
+              size="small"
               label={label}
               type={type}
               htmlFor={`component-outlined-${nameField}`}

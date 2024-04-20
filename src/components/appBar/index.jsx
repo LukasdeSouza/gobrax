@@ -2,25 +2,14 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import { Button, Link, Stack } from '@mui/material';
 import goBraxLogo from '../../assets/goBrax_logo.png'
 
 export default function MenuAppBar() {
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -59,11 +48,12 @@ export default function MenuAppBar() {
           </Stack>
           <img src={goBraxLogo} alt='Logo da goBrax' style={{width: 200}}/>
           <Button 
-          variant='contained' 
-          style={{
-            textTransform:'capitalize',
-            backgroundColor: '#1323b0'
-          }}
+            variant='contained'
+            onClick={() => window.open('https://www.linkedin.com/in/lucas-de-souza-silva-227185211/', "_blank")}
+            style={{
+              textTransform:'capitalize',
+              backgroundColor: '#1323b0'
+            }}
           >
             Linkedin
           </Button>

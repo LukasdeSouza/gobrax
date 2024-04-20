@@ -1,0 +1,74 @@
+{
+  "drivers": [
+    {
+      "id": "4",
+      "name": "Antonio Fagundes",
+      "document": "789.456.123",
+      "bound": "yes",
+      "vehicle": "GHI9012"
+    },
+    {
+      "id": "ff4c",
+      "bound": "yes",
+      "vehicle": "DEF5678",
+      "document": "465.454.654-645",
+      "name": "Gualberto Cabral Nunes"
+    },
+    {
+      "id": "2cb4",
+      "bound": "no",
+      "vehicle": "",
+      "document": "654.646.546-545",
+      "name": "duhasiuhdaiuhduiahda"
+    },
+    {
+      "id": "161e",
+      "name": "DANIEL DAS COSTA",
+      "document": "243.543.514-51",
+      "bound": "no",
+      "vehicle": ""
+    },
+    {
+      "id": "2fd8",
+      "name": "Abrao da Silva",
+      "document": "516.443.513-515",
+      "bound": "no",
+      "vehicle": ""
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "1",
+      "brand": "SCANIA",
+      "model": "SXAD",
+      "plate": "1434",
+      "bound": "no",
+      "driver": "",
+      "modelo": ""
+    },
+    {
+      "id": "8e5d",
+      "brand": "ABC",
+      "plate": "154-XZ",
+      "model": "Abc",
+      "bound": "no",
+      "driver": ""
+    },
+    {
+      "id": "3f9d",
+      "brand": "HYUNDAI",
+      "plate": "XUAHSA",
+      "model": "DA5S4DA",
+      "bound": "yes",
+      "driver": "fernando"
+    },
+    {
+      "id": "5ab2",
+      "brand": "VOLVO",
+      "plate": "15D4AD",
+      "model": "SUHCX4",
+      "bound": "no",
+      "driver": ""
+    }
+  ]
+}
