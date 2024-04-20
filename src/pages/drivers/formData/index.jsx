@@ -1,20 +1,11 @@
 import { Stack } from "@mui/material"
-import { useForm } from "react-hook-form"
 import InputTextController from '../../../components/inputs/inputTextController'
 import InputSelectController from "../../../components/inputs/inputSelectController"
 import { useEffect } from "react"
-import { validateDocument } from "../../../utils/validate"
 import { cpfMask } from "../../../utils/masks"
 
-const FormDataDrivers = ({storeItemDriver, storeItemVehicle, handleSaveDriver}) => {
-  const { control, watch, setValue,  handleSubmit } = useForm({
-    defaultValues: {
-      bound: '',
-      vehicle: '',
-      document: null
-    }
-  })
 
+const FormDataDrivers = ({control, watch, setValue, storeItemDriver, storeItemVehicle, handleSaveDriver}) => {
   const loadData = () => {
     Object.keys(storeItemDriver).forEach(key => {
       setValue(key, storeItemDriver[key] ?? '', { shouldValidate: false });
@@ -24,17 +15,20 @@ const FormDataDrivers = ({storeItemDriver, storeItemVehicle, handleSaveDriver}) 
   useEffect(() => {
     if (Object.keys(storeItemDriver)?.length > 0) {
       loadData()
+    } else {
+      setValue('name', '')
+      setValue('document', '')
+      setValue('bound', '')
+      setValue('vehicle', '')
     }
   }, [])
 
   return(
     <Stack
-      component={'form'}
       height={'100%'}
       paddingRight={1}
       marginBottom={3}
       marginRight={-1}
-      onSubmit={handleSubmit(() => handleSaveDriver({...control._formValues}))}
       gap={3}
     >
       <InputTextController
@@ -47,7 +41,6 @@ const FormDataDrivers = ({storeItemDriver, storeItemVehicle, handleSaveDriver}) 
         nameField={'document'}
         control={control}
         label={'Documento'}
-        validate={validateDocument}
         mask={cpfMask}
         required
       />

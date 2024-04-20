@@ -21,10 +21,12 @@ class DriversController {
 
   async addNewDriver(newDriver) {
     this.store.setLoading('save', true)
-    const data = await serviceApi(this.endPoint, 'POST', newDriver)
+    const stringify = JSON.stringify(newDriver)
 
-    if(data) {
+    const data = await serviceApi(this.endPoint, 'POST', stringify)
+    if (data) {
       alert('Motorista Adicionado com Sucesso!')
+      this.getAllDrivers()
     } else {
       alert('Erro ao Criar Motorista!')
     }
@@ -33,10 +35,12 @@ class DriversController {
 
   async updateDriver(driverId, driver) {
     this.store.setLoading('update', true)
-    const data = await serviceApi(`${this.endPoint}/${driverId}`, 'PATCH', driver)
+    const stringify = JSON.stringify(driver)
+    const data = await serviceApi(`${this.endPoint}/${driverId}`, 'PATCH', stringify)
 
     if(data) {
       alert('Motorista Atualizado com Sucesso!')
+      this.getAllDrivers()
     } else {
       alert('Erro ao Atualizar Motorista!')
     }

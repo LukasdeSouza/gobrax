@@ -11,6 +11,7 @@ import ModalEdit from '../../components/modal'
 import DriversController from '../../controllers/driversController'
 import SelectedData from '../../components/selectedData'
 import { observer } from 'mobx-react-lite'
+import { useForm } from 'react-hook-form'
 
 
 const DriversPage = observer(() => {
@@ -18,6 +19,14 @@ const DriversPage = observer(() => {
   const controller = new DriversController(driversStore, 'drivers')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
+
+  const { control, watch, setValue,   } = useForm({
+   defaultValues: {
+      bound: '',
+      vehicle: '',
+      document: null
+    }
+  })
 
   const onClickDelete = () => {
     setConfirmDelete(true)
@@ -28,13 +37,21 @@ const DriversPage = observer(() => {
 
   const handleDeleteDriver = async () => {
     const driverId = driversStore.state.driver?.id
-    await controller.deleteDriver(driverId)
+    await controller.deleteDriver(driverId).then(() => {
+      controller.getAllDrivers()
+    })
     setConfirmDelete(false)
     setIsModalOpen(false)
   }
 
-  const handleSaveDriver = async (driver) => {
-    await controller.addNewDriver(driver)
+  const handleSaveDriver = async () => {
+    const driver = {...control._formValues}
+
+    if (driver?.id) {
+      await controller.updateDriver(driver?.id, driver)
+    } else {
+      await controller.addNewDriver(driver)
+    }
     setIsModalOpen(false)
   }
 
@@ -95,10 +112,15 @@ const DriversPage = observer(() => {
       }
         <ModalEdit
           isModalOpen={isModalOpen}
-          handleCloseModal={() => setIsModalOpen(false)}
+          handleCloseModal={() => {
+            setIsModalOpen(false)
+          }}
           title={'Motorista'}
         >
           <FormDataDrivers
+            control={control}
+            setValue={setValue}
+            watch={watch}
             storeItemDriver={driversStore.state.driver}
             storeItemVehicle={vehiclesStore.state.vehiclesList}
             handleSaveDriver={handleSaveDriver}
