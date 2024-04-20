@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from '@mui/material'
+import { Button, CircularProgress, Stack, Typography } from '@mui/material'
 import TableCustom from '../../components/table'
 import {headCellsDrivers} from './table/headCells'
 import TableRowDrivers from './table/tableRow/index'
@@ -100,6 +100,8 @@ const DriversPage = observer(() => {
             headCells={headCellsDrivers}
             dataRow={dataRow}
           />
+          : driversStore.loading.list
+          ? <CircularProgress color='primary'/>
           : <Stack height={'40vh'} alignItems={'center'} justifyContent={'center'}>
               <Typography>Não há dados para exibir</Typography>
             </Stack>

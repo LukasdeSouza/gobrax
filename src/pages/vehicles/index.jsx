@@ -1,4 +1,4 @@
-import { Box, Button, Container, Modal, Slide, Stack, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Container, Modal, Slide, Stack, Typography } from '@mui/material'
 import TableCustom from '../../components/table'
 import TableRowVehicles from './table/tableRow/index'
 import { headCellsVehicles } from './table/headCells'
@@ -30,8 +30,12 @@ const VehiclesPage = () => {
     }, 2000)
   }
 
-  const handleDeleteVehicle = () => {
+  const handleDeleteVehicle = async () => {
+    const vehicleId = vehiclesStore.state.vehicle?.id
+    await controller.deleteDriver(vehicleId)
+    await controller.getAllVehicles()
     setConfirmDelete(false)
+    setIsModalOpen(false)
   }
 
   const handleSaveVehicles = async () => {
@@ -42,6 +46,7 @@ const VehiclesPage = () => {
     } else {
       await controller.addNewDriver(vehicles)
     }
+    await controller.getAllVehicles()
     setIsModalOpen(false)
   }
 
@@ -81,11 +86,19 @@ const VehiclesPage = () => {
             Adicionar Veículo
           </Button>
         </Stack>
-        <TableCustom
-          rows={vehiclesStore.state.vehiclesList}
-          dataRow={dataRow}
-          headCells={headCellsVehicles}
+        {vehiclesStore.state.vehiclesList.length > 0 
+        ? <TableCustom
+            rows={vehiclesStore.state.vehiclesList}
+            dataRow={dataRow}
+            headCells={headCellsVehicles}
           />
+          : vehiclesStore.loading.list
+          ? <CircularProgress color='primary'/>
+            : <Stack height={'40vh'} alignItems={'center'} justifyContent={'center'}>
+              <Typography>Não há dados para exibir</Typography>
+            </Stack>
+        }
+
       </Stack>
         <ModalEdit
           isModalOpen={isModalOpen}

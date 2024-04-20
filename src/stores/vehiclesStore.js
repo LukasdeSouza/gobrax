@@ -6,6 +6,8 @@ class VehiclesStore {
     vehicle: {}
   }
   loading = {
+    list: false,
+    update: false,
     delete: false,
     save: false,
   }
