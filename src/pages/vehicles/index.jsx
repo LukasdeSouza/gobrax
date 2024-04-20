@@ -1,10 +1,9 @@
-import { Box, Button, CircularProgress, Container, Modal, Slide, Stack, Typography } from '@mui/material'
+import { Button, CircularProgress, Stack, Typography } from '@mui/material'
 import TableCustom from '../../components/table'
 import TableRowVehicles from './table/tableRow/index'
 import { headCellsVehicles } from './table/headCells'
-import {rowsVehicles} from './table/rows/index'
 import { Add } from '@mui/icons-material'
-import { useContext, useEffect, useLayoutEffect, useState } from 'react'
+import { useContext, useLayoutEffect, useState } from 'react'
 import RootStoreContext from '../../rootStore'
 import ModalEdit from '../../components/modal'
 import FormDataVehicles from './formData'
@@ -33,6 +32,7 @@ const VehiclesPage = observer(() => {
   const handleDeleteVehicle = async () => {
     const vehicleId = vehiclesStore.state.vehicle?.id
     await controller.deleteVehicle(vehicleId)
+    await controller.getAllVehicles()
     setConfirmDelete(false)
     setIsModalOpen(false)
   }
@@ -45,7 +45,6 @@ const VehiclesPage = observer(() => {
     } else {
       await controller.addNewVehicle(vehicles)
     }
-    await controller.getAllVehicles()
     setIsModalOpen(false)
   }
 
@@ -61,6 +60,11 @@ const VehiclesPage = observer(() => {
           vehiclesStore.setState('vehicle', row)
           handleClick()
         }}
+        onClickEdit={() => {
+          vehiclesStore.setState('vehicle', row)
+          setIsModalOpen(true)
+        }}
+        onClickDelete={handleDeleteVehicle}
       />
     )
   }

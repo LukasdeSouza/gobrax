@@ -7,9 +7,6 @@ class DriversStore {
   }
   loading = {
     list: false,
-    update: false,
-    delete: false,
-    save: false,
   }
 
   constructor() {

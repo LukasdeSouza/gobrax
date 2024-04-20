@@ -1,6 +1,7 @@
-import { Checkbox, TableCell, TableRow } from "@mui/material"
+import { Delete, Edit } from "@mui/icons-material"
+import { Checkbox, IconButton, Stack, TableCell, TableRow } from "@mui/material"
 
-const TableRowVehicles = ({row, isItemSelected, labelId, handleClick}) => {
+const TableRowVehicles = ({row, isItemSelected, labelId, handleClick, onClickEdit, onClickDelete}) => {
   return (
     <TableRow
       hover
@@ -34,6 +35,16 @@ const TableRowVehicles = ({row, isItemSelected, labelId, handleClick}) => {
     <TableCell align="left">{row.model}</TableCell>
     <TableCell align="left">{row.plate}</TableCell>
     <TableCell align="left">{row.bound ? 'Sim' : 'Não'}</TableCell>
+    <TableCell align="left" width={100}>
+      <Stack direction='row'>
+        <IconButton size="small" onClick={onClickEdit}>
+          <Edit/>
+        </IconButton>
+        <IconButton size="small" onClick={onClickDelete}>
+          <Delete/>
+        </IconButton>
+      </Stack>
+    </TableCell>
   </TableRow>
   )
 }

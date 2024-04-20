@@ -29,4 +29,10 @@ export const headCellsVehicles = [
     disablePadding: false,
     label: 'Vínculado',
   },
+  {
+    id: 'actions',
+    numeric: false,
+    disablePadding: false,
+    label: 'Ações',
+  },
 ];

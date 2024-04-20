@@ -21,7 +21,6 @@ class VehiclesController {
   }
 
   async addNewVehicle(newDriver) {
-    this.store.setLoading('save', true)
     const stringify = JSON.stringify(newDriver)
 
     const data = await serviceApi(this.endPoint, 'POST', stringify)
@@ -31,11 +30,9 @@ class VehiclesController {
     } else {
       toastError({message: 'Erro ao Criar Veículo!'})
     }
-    this.store.setLoading('save', false)
   }
 
   async updateVehicle(driverId, driver) {
-    this.store.setLoading('update', true)
     const stringify = JSON.stringify(driver)
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'PATCH', stringify)
 
@@ -45,20 +42,16 @@ class VehiclesController {
     } else {
       toastError({message: 'Erro ao Atualizar Veículo!'})
     }
-    this.store.setLoading('update', false)
   }
 
   async deleteVehicle(driverId) {
-    this.store.setLoading('delete', true)
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'DELETE')
 
     if(data) {
       toastSuccess({message: 'Veículo Deletado com Sucesso!'})
-      this.getAllDrivers()
     } else {
       toastError({message: 'Erro ao Deletar Veículo!'})
     }
-    this.store.setLoading('delete', false)
   }
 
 

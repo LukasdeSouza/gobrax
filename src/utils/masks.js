@@ -1,3 +1,4 @@
+
 export const cpfMask = value => {
   if (!value) {
     return value
@@ -28,8 +29,4 @@ export const valueMask = (value) => {
 
 export const unMask = (value) => {
   return value.replace(new RegExp(/[^\d]/, 'g'), '')
-}
-
-export const formatCurrency = (value) => {
-  return currency(value, { separator: '.', decimal: ',', symbol: '' }).format()
 }
