@@ -1,3 +1,4 @@
+import { toastError, toastSuccess } from "../components/toast/toastAlert"
 import { serviceApi } from "../service"
 
 class DriversController {
@@ -14,7 +15,7 @@ class DriversController {
     if(data) {
       this.store.setState('driversList', data)
     } else {
-      alert('Não foi possível carregador os Dados!')
+      toastError({message: 'Não foi possível carregador os Dados!'})
     }
     this.store.setLoading('list', false)
   }
@@ -25,10 +26,10 @@ class DriversController {
 
     const data = await serviceApi(this.endPoint, 'POST', stringify)
     if (data) {
-      alert('Motorista Adicionado com Sucesso!')
+      toastSuccess({message: 'Motorista Adicionado com Sucesso!'})
       this.getAllDrivers()
     } else {
-      alert('Erro ao Criar Motorista!')
+      toastError({message: 'Erro ao Criar Motorista!'})
     }
     this.store.setLoading('save', false)
   }
@@ -39,10 +40,10 @@ class DriversController {
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'PATCH', stringify)
 
     if(data) {
-      alert('Motorista Atualizado com Sucesso!')
+      toastSuccess({message: 'Motorista Atualizado com Sucesso!'})
       this.getAllDrivers()
     } else {
-      alert('Erro ao Atualizar Motorista!')
+      toastError({message: 'Erro ao Atualizar Motorista!'})
     }
     this.store.setLoading('update', false)
   }
@@ -52,10 +53,10 @@ class DriversController {
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'DELETE')
 
     if(data) {
-      alert('Motorista Deletado com Sucesso!')
+      toastSuccess({message: 'Motorista Deletado com Sucesso!'})
       this.getAllDrivers()
     } else {
-      alert('Erro ao Deletar Motorista!')
+      toastError({message: 'Erro ao Deletar Motorista!'})
     }
     this.store.setLoading('delete', false)
   }

@@ -1,3 +1,4 @@
+import { toastError, toastSuccess } from "../components/toast/toastAlert"
 import { serviceApi } from "../service"
 
 class VehiclesController {
@@ -25,10 +26,10 @@ class VehiclesController {
 
     const data = await serviceApi(this.endPoint, 'POST', stringify)
     if (data) {
-      alert('Veículo Adicionado com Sucesso!')
+      toastSuccess({message: 'Veículo Adicionado com Sucesso!'})
       this.getAllDrivers()
     } else {
-      alert('Erro ao Criar Veículo!')
+      toastError({message: 'Erro ao Criar Veículo!'})
     }
     this.store.setLoading('save', false)
   }
@@ -39,10 +40,10 @@ class VehiclesController {
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'PATCH', stringify)
 
     if(data) {
-      alert('Veículo Atualizado com Sucesso!')
+      toastSuccess({message: 'Veículo Atualizado com Sucesso!'})
       this.getAllDrivers()
     } else {
-      alert('Erro ao Atualizar Veículo!')
+      toastError({message: 'Erro ao Atualizar Veículo!'})
     }
     this.store.setLoading('update', false)
   }
@@ -52,10 +53,10 @@ class VehiclesController {
     const data = await serviceApi(`${this.endPoint}/${driverId}`, 'DELETE')
 
     if(data) {
-      alert('Veículo Deletado com Sucesso!')
+      toastSuccess({message: 'Veículo Deletado com Sucesso!'})
       this.getAllDrivers()
     } else {
-      alert('Erro ao Deletar Veículo!')
+      toastError({message: 'Erro ao Deletar Veículo!'})
     }
     this.store.setLoading('delete', false)
   }
